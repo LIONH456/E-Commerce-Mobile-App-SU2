@@ -1,0 +1,20 @@
+<svg width="250" height="120" viewBox="0 0 250 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="250" height="120" rx="10" fill="#1D55F3"/>
+<mask id="mask0_19_1748" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="250" height="120">
+<rect width="250" height="120" rx="8" fill="#06AB8D"/>
+</mask>
+<g mask="url(#mask0_19_1748)">
+<ellipse opacity="0.13" cx="37.7618" cy="15.2223" rx="59.5485" ry="54.717" fill="#1D55F3"/>
+<ellipse opacity="0.2" cx="131.525" cy="134.992" rx="39.7082" ry="36.4865" fill="#FBFF2E"/>
+<path d="M168.216 20.0869L160.293 12.1635" stroke="white" stroke-linecap="round"/>
+<path d="M178.216 20.0869L170.293 12.1635" stroke="white" stroke-linecap="round"/>
+<g opacity="0.2">
+<path d="M218.802 20.4783L226.725 12.5549" stroke="white" stroke-linecap="round"/>
+<path d="M208.802 20.4783L216.725 12.5549" stroke="white" stroke-linecap="round"/>
+</g>
+<circle cx="235.246" cy="71.1182" r="1.51721" fill="white"/>
+<circle cx="163.276" cy="71.4393" r="1.5" fill="#FBFF2E"/>
+<circle opacity="0.4" cx="232.557" cy="98.6777" r="1.17236" stroke="#F3F7F9"/>
+<circle cx="88.4253" cy="99.5781" r="1.17236" stroke="#F3F7F9"/>
+</g>
+</svg>

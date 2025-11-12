@@ -1,0 +1,81 @@
+import 'package:buzzmarket/core/resources/app_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../generated/assets.dart';
+import '../../Home_data/models/CustomListTitleModel.dart';
+import 'CustomListViewItemDrawerWidget.dart';
+import 'active_unactive_list_view.dart';
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
+    return Container(
+      color: Colors.white,
+      width: MediaQuery.sizeOf(context).width * 0.8,  
+
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: height * 0.05,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SvgPicture.asset(
+              Assets.imagesProfile,
+              // fit: BoxFit.fill,
+              colorFilter:
+                  ColorFilter.mode(ColorManager.primary, BlendMode.srcIn),
+              width: 50,
+              height: 50,
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: height * 0.01,
+            ),
+          ),
+           CustomListViewItemDrawer(),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            fillOverscroll: true,
+            child: Column(
+              children: [
+                const Expanded(child: SizedBox()),
+                InkWell(
+                  mouseCursor: SystemMouseCursors.click,
+                    onTap: () {
+                    },
+                    child: const UnActiveListView(
+                      listTitleModel: CustomListTitleModel(
+                          "Sign Out", Assets.imagesTrending),
+                      isColorText: false,
+                    )),
+                /*GestureDetector(
+                  onTap: () {},
+                  child: const UnActiveListView(
+                      listTitleModel: CustomListTitleModel(
+                          "Settings", Assets.imagesIconSettings)
+                  ),
+                ),*/
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

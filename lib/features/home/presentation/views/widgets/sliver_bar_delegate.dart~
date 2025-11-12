@@ -1,0 +1,27 @@
+// Custom SliverPersistentHeaderDelegate
+import 'package:flutter/material.dart';
+
+class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  SliverAppBarDelegate(this.widget);
+
+  final Widget widget;
+
+  @override
+  double get minExtent => 56 + 71;
+
+  @override
+  double get maxExtent => 56 + 71;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: widget,
+    );
+  }
+
+  @override
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
+    return false;
+  }
+}
