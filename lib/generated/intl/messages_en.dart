@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutShopapay": MessageLookupByLibrary.simpleMessage("About Shopapay"),
     "accessibility": MessageLookupByLibrary.simpleMessage("Accessibility"),
+    "accountCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Account created successfully",
+    ),
     "addAddress": MessageLookupByLibrary.simpleMessage("Add Address"),
     "addCard": MessageLookupByLibrary.simpleMessage("Add card"),
     "addDeliveryInstruction": MessageLookupByLibrary.simpleMessage(
@@ -55,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
+    "asteriskPlaceholder": MessageLookupByLibrary.simpleMessage("********"),
     "bWowdWireless": MessageLookupByLibrary.simpleMessage("B.Wow\'d Wireless"),
     "backToHome": MessageLookupByLibrary.simpleMessage("Back to Home"),
     "bangla": MessageLookupByLibrary.simpleMessage("Bangla"),
@@ -151,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailNotifications": MessageLookupByLibrary.simpleMessage(
       "Email Notifications",
     ),
+    "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "endOfSeason": MessageLookupByLibrary.simpleMessage("END OF SEASON"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterCodeVoucher": MessageLookupByLibrary.simpleMessage(
@@ -177,6 +182,9 @@ class MessageLookup extends MessageLookupByLibrary {
           "Enter your naw password , Remember this time!",
         ),
     "enterYourOtp": MessageLookupByLibrary.simpleMessage("Enter Your OTP"),
+    "enterYourUsernameOrGmail": MessageLookupByLibrary.simpleMessage(
+      "Enter your username or Gmail",
+    ),
     "error404": MessageLookupByLibrary.simpleMessage("Error 404"),
     "errorMessage": MessageLookupByLibrary.simpleMessage(
       "We are not online this time. Please try again later",
@@ -243,16 +251,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "howDoITrackOrder": MessageLookupByLibrary.simpleMessage(
       "How do I track my order?",
     ),
+    "identifierRequired": MessageLookupByLibrary.simpleMessage(
+      "Username or email is required",
+    ),
     "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
+    "invalidGmailAddress": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid Gmail address",
+    ),
     "italian": MessageLookupByLibrary.simpleMessage("Italian"),
     "itemAtCart": MessageLookupByLibrary.simpleMessage("Item at Cart"),
     "items": MessageLookupByLibrary.simpleMessage("Items"),
     "jasmineTop": MessageLookupByLibrary.simpleMessage("Jasmine Top"),
     "jobVacancy": MessageLookupByLibrary.simpleMessage("Job Vacancy"),
+    "khmer": MessageLookupByLibrary.simpleMessage("Khmer"),
     "kids": MessageLookupByLibrary.simpleMessage("Kids"),
     "korean": MessageLookupByLibrary.simpleMessage("Korean"),
     "l": MessageLookupByLibrary.simpleMessage("L"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "languageChangeRestartMessage": MessageLookupByLibrary.simpleMessage(
+      "Language will be changed. The app will close to apply the changes.",
+    ),
     "leafPrintGuipureLaceButterfly": MessageLookupByLibrary.simpleMessage(
       "Leaf Print Guipure Lace Butterfly",
     ),
@@ -279,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logOutConfirmation": MessageLookupByLibrary.simpleMessage(
       "Are you sure want to Log Out?",
     ),
+    "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "Log in to access your personalized real estate experience",
     ),
@@ -324,6 +343,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "otpVerification": MessageLookupByLibrary.simpleMessage("OTP Verification"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordAtLeast8Characters": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 8 characters long",
+    ),
+    "passwordRequired": MessageLookupByLibrary.simpleMessage(
+      "Password is required",
+    ),
     "patrickRaddenKeefeReviewer": MessageLookupByLibrary.simpleMessage(
       "Patrick Radden KeefeReviewer: David Grube and Gary DeLander",
     ),
@@ -332,6 +357,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "paymentMethods": MessageLookupByLibrary.simpleMessage("Payment Methods"),
     "placeDoesntExist": MessageLookupByLibrary.simpleMessage(
       "The place doesn’t exist",
+    ),
+    "pleaseAcceptTermsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Please accept the terms and conditions",
     ),
     "pleaseWait": MessageLookupByLibrary.simpleMessage("Please Wait"),
     "pleatFrontTop": MessageLookupByLibrary.simpleMessage("Pleat Front Top"),
@@ -450,6 +478,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown Location"),
     "upTo30Off": MessageLookupByLibrary.simpleMessage("UP TO 30% OFF"),
     "usa": MessageLookupByLibrary.simpleMessage("USA"),
+    "usernameRequired": MessageLookupByLibrary.simpleMessage(
+      "Username is required",
+    ),
     "vNeck": MessageLookupByLibrary.simpleMessage("V neck"),
     "vSizeLevelTop": MessageLookupByLibrary.simpleMessage("V size level Top"),
     "verify": MessageLookupByLibrary.simpleMessage("Verify"),

@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:e_commerce_final/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:navy_wear/core/utils/extensions.dart';
 
 import '../../core/function/components.dart';
 import '../../core/utils/app_images.dart';
 import '../../core/utils/app_routes.dart';
 import '../../core/utils/constant.dart';
+import '../auth/presentation/cubit/auth_cubit.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -32,47 +33,56 @@ class SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     super.initState();
 
     // Initialize AnimationControllers
-    _colorController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    _slideController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-    _roundController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _colorController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _slideController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    _roundController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
 
     // Define color transition animation
     final targetColor = isAppDarkMode() ? kDarkColor : kWhiteColor;
     _colorAnimation = ColorTween(
-            begin: isAppDarkMode() ? kDarkPrimaryColor : kLightPrimaryColor,
-            end: targetColor)
-        .animate(
-      CurvedAnimation(parent: _colorController, curve: Curves.linear),
-    );
+      begin: isAppDarkMode() ? kDarkPrimaryColor : kLightPrimaryColor,
+      end: targetColor,
+    ).animate(CurvedAnimation(parent: _colorController, curve: Curves.linear));
 
     // Define slide animations
-    _slideAnimationUp =
-        Tween<Offset>(begin: const Offset(0, 4), end: Offset.zero).animate(
-      CurvedAnimation(parent: _slideController, curve: Curves.linear),
-    );
-    _slideAnimationBot =
-        Tween<Offset>(begin: const Offset(0, -4), end: Offset.zero).animate(
-      CurvedAnimation(parent: _slideController, curve: Curves.linear),
-    );
+    _slideAnimationUp = Tween<Offset>(
+      begin: const Offset(0, 4),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _slideController, curve: Curves.linear));
+    _slideAnimationBot = Tween<Offset>(
+      begin: const Offset(0, -4),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _slideController, curve: Curves.linear));
 
     // Define round animation
-    _roundAnimation =
-        Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      parent: _roundController,
-      curve: Curves.easeInOut,
-    ));
+    _roundAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _roundController, curve: Curves.easeInOut),
+    );
 
     // Start animations
     _colorController.forward();
     _slideController.forward();
     _roundController.repeat(reverse: true); // Continuous rounding effect
 
-    // Navigate to onboarding screen after a delay
+    // Navigate based on authentication status after a delay
     Timer(const Duration(seconds: 2), () {
-      router.go(AppRoutes.onboarding);
+      final authState = context.read<AuthCubit>().state;
+      if (authState.status == AuthStatus.authenticated) {
+        // User already logged in, skip to home
+        router.go(AppRoutes.homeLayout);
+      } else {
+        // User not logged in, show onboarding
+        router.go(AppRoutes.onboarding);
+      }
     });
   }
 

@@ -1,5 +1,94 @@
 # Shopapay - E-Commerce Mobile Application
 
+## Project Overview
+
+Shopapay is an e-commerce mobile app built with Flutter. It supports product browsing, cart management, user authentication, localization, and theme preferences. The codebase follows a feature-based structure and uses BLoC/Cubit for state management.
+
+Key points
+- Platforms: Android, iOS, Web, Desktop
+- Flutter SDK: 3.8.x
+- State management: flutter_bloc (Cubit)
+- Networking: Dio
+- Localization: intl + intl_utils (ARB files under `lib/l10n`)
+- Persistence: SharedPreferences (CachedHelper wrapper)
+
+## Recent Enhancements (implemented)
+- Prevented Locale null crash at startup (safe default language)
+- Fixed malformed ARB file and regenerated localization
+- Replaced hardcoded login/register strings with localized keys
+- Added password visibility toggle (eye icon) in login/register
+- Persist user profile after login so authenticated users skip onboarding
+- Cached products and categories (JSON in SharedPreferences)
+- Product details gallery shows all images (portrait aspect) with loading/error handling
+- Settings: language-change confirmation dialog and app restart via Phoenix.rebirth()
+
+## Project Structure (high level)
+- `lib/core` — shared utilities, constants, widgets
+- `lib/features` — feature folders (auth, home, profile, cart, onboarding, splash, etc.)
+- `lib/features/*/data/models` — data models (ProductModel, CategoryModel)
+- `lib/features/*/presentation/cubit` — Cubits for state
+- `lib/generated` — generated localization code
+- `lib/l10n` — ARB translation files
+
+## Important Implementation Details
+
+- Localization
+  - ARB files: `intl_en.arb`, `intl_ar.arb`, `intl_km.arb`
+  - Use `dart run intl_utils:generate` after ARB edits
+
+- Caching
+  - Cached keys: product and category cache keys in `HomePageCubit`
+  - Models implement `toJson()`/`fromJson()` for persistence
+  - On startup, cubit loads cache then fetches fresh data
+
+- Auth
+  - AuthCubit saves user profile to cache after successful login
+  - Splash checks auth state to decide whether to skip onboarding
+
+- Product Gallery
+  - PageView-based carousel shows all images
+  - Portrait aspect ratio and network loading/error placeholders
+
+## API
+
+- Base URL: `https://su12ecommerce.lionh456.uk/api/`
+- Media base: `https://su12ecommerce.lionh456.uk/`
+- HTTP client: Dio with timeout and error mapping
+
+Note: If you see host lookup failures on mobile (e.g., "Failed host lookup"), that is typically environment/network-related (emulator DNS, VPN, or firewall). See troubleshooting below.
+
+## Troubleshooting: Host lookup / network failures on mobile
+
+Common causes and checks:
+- Emulator DNS: Android emulator may not resolve certain hostnames. Test on a real device or ensure emulator DNS is correct.
+- Use `adb shell` networking checks (or open the host URL in the device browser).
+- If backend is on localhost, use `10.0.2.2` (Android emulator) or map correctly for iOS simulator.
+- Check VPN/proxy or corporate firewall affecting DNS resolution.
+
+If you want, I can guide you through collecting the device logs (flutter run on device) and interpreting the stack trace.
+
+## Next recommended actions
+
+1. Run `flutter analyze` and `flutter test` locally to catch remaining issues.
+2. Verify flows on a physical device: login, caching, product gallery, language change.
+3. Improve credential security: avoid storing plaintext passwords in SharedPreferences — use secure storage or store tokens only.
+4. Add a UI action to force-refresh cache (optional).
+
+## How to regenerate localization
+
+1. Update ARB files under `lib/l10n`
+2. Run: `dart run intl_utils:generate`
+3. Rebuild the app
+
+## Contact / Maintainers
+
+Maintained by the development team in this repository. Open an issue or PR for changes.
+
+---
+
+Last updated: 2025-11-13
+# Shopapay - E-Commerce Mobile Application
+
 ## 📱 Project Overview
 
 **Shopapay** is a comprehensive, feature-rich e-commerce mobile application built with Flutter. The application provides a complete shopping experience with product browsing, cart management, user authentication, payment processing, and much more. The app is designed to support multiple languages (English, Arabic, French) and offers both light and dark themes for enhanced user experience.
@@ -130,8 +219,7 @@
 ### 10. **Internationalization (i18n)**
 - **Supported Languages:**
   - English (en)
-  - Arabic (ar)
-  - French (fr)
+  - Khmer (km)
 - **RTL Support:** Full right-to-left layout support for Arabic
 - **Localized Content:** All UI strings are localized
 

@@ -1,4 +1,3 @@
-
 // import 'package:device_preview/device_preview.dart';
 import 'package:e_commerce_final/core/utils/app_routes.dart';
 import 'package:e_commerce_final/core/utils/app_theme.dart';
@@ -12,9 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'features/auth/presentation/cubit/auth_cubit.dart';
+import 'features/my_cart/presentation/cubit/my_card_cubit.dart';
 
-Future <void> main() async {
- WidgetsFlutterBinding.ensureInitialized();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
   await CachedHelper.init();
   Bloc.observer = MyBlocObserver();
@@ -23,8 +24,9 @@ Future <void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness:
-          appTheme == kDark ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: appTheme == kDark
+          ? Brightness.light
+          : Brightness.dark,
     ),
   );
 
@@ -38,7 +40,7 @@ Future <void> main() async {
     //     builder: (context) => const MyApp(),
     //   ),
     // ),
-    MyApp()
+    MyApp(),
   );
 }
 
@@ -50,20 +52,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: MaterialApp.router(
-        // builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        title: 'Shopapay',
-        theme:
-            CachedHelper.getData(kAppTheme) == kDark ? darkTheme : lightTheme,
-        locale: Locale(CachedHelper.getData(kAppLanguage)),
-        localeResolutionCallback: localResolutionCallback,
-        localizationsDelegates: localizationsDelegates(),
-        supportedLocales: S.delegate.supportedLocales,
-        routerConfig: router,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>(create: (_) => AuthCubit()..loadUser()),
+          BlocProvider<MyCartCubit>(create: (_) => MyCartCubit()..loadCart()),
+        ],
+        child: MaterialApp.router(
+          // builder: DevicePreview.appBuilder,
+          debugShowCheckedModeBanner: false,
+          title: 'Shopapay',
+          theme: CachedHelper.getData(kAppTheme) == kDark
+              ? darkTheme
+              : lightTheme,
+          // Ensure we always provide a valid locale language code (default to 'en')
+          locale: Locale(
+            (CachedHelper.getData(kAppLanguage) as String?) ?? 'en',
+          ),
+          localeResolutionCallback: localResolutionCallback,
+          localizationsDelegates: localizationsDelegates(),
+          supportedLocales: S.delegate.supportedLocales,
+          routerConfig: router,
+        ),
       ),
     );
   }
 }
-
-

@@ -28,10 +28,9 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name =
-        (locale.countryCode?.isEmpty ?? false)
-            ? locale.languageCode
-            : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1423,8 +1422,8 @@ class S {
   /// `Hello, mahmoud 👋`
   String get helloMahmoud {
     return Intl.message(
-      'Hello, Chanbora 👋',
-      name: 'Hello Chanbora',
+      'Hello, mahmoud 👋',
+      name: 'helloMahmoud',
       desc: '',
       args: [],
     );
@@ -1763,6 +1762,11 @@ class S {
   /// `Register`
   String get register {
     return Intl.message('Register', name: 'register', desc: '', args: []);
+  }
+
+  /// `Login`
+  String get loginButton {
+    return Intl.message('Login', name: 'loginButton', desc: '', args: []);
   }
 
   /// `Enter your Email then we will send you OTP to reset new password.`
@@ -2189,6 +2193,121 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter your username or Gmail`
+  String get enterYourUsernameOrGmail {
+    return Intl.message(
+      'Enter your username or Gmail',
+      name: 'enterYourUsernameOrGmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username or email is required`
+  String get identifierRequired {
+    return Intl.message(
+      'Username or email is required',
+      name: 'identifierRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get passwordRequired {
+    return Intl.message(
+      'Password is required',
+      name: 'passwordRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is required`
+  String get usernameRequired {
+    return Intl.message(
+      'Username is required',
+      name: 'usernameRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is required`
+  String get emailRequired {
+    return Intl.message(
+      'Email is required',
+      name: 'emailRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid Gmail address`
+  String get invalidGmailAddress {
+    return Intl.message(
+      'Please enter a valid Gmail address',
+      name: 'invalidGmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters long`
+  String get passwordAtLeast8Characters {
+    return Intl.message(
+      'Password must be at least 8 characters long',
+      name: 'passwordAtLeast8Characters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account created successfully`
+  String get accountCreatedSuccessfully {
+    return Intl.message(
+      'Account created successfully',
+      name: 'accountCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please accept the terms and conditions`
+  String get pleaseAcceptTermsAndConditions {
+    return Intl.message(
+      'Please accept the terms and conditions',
+      name: 'pleaseAcceptTermsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `********`
+  String get asteriskPlaceholder {
+    return Intl.message(
+      '********',
+      name: 'asteriskPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language will be changed. The app will close to apply the changes.`
+  String get languageChangeRestartMessage {
+    return Intl.message(
+      'Language will be changed. The app will close to apply the changes.',
+      name: 'languageChangeRestartMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Khmer`
+  String get khmer {
+    return Intl.message('Khmer', name: 'khmer', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -2199,6 +2318,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'ar'),
       Locale.fromSubtags(languageCode: 'fr'),
+      Locale.fromSubtags(languageCode: 'km'),
     ];
   }
 

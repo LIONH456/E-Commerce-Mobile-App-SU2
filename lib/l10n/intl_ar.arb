@@ -219,6 +219,7 @@
   "forgetPassword": "نسيت كلمة المرور",
   "continuee": "استمر",
   "register": "تسجيل",
+  "loginButton": "تسجيل الدخول",
   "logInToAccessYourPersonalized": "تسجيل الدخول للوصول إلى تجربة العقار الشخصية الخاصة بك",
   "name": "الاسم",
   "email": "البريد الالكتروني",
@@ -282,7 +283,18 @@
   "arabic": "العربية",
   "getStarted": "ابدأ",
   "next": "التالي",
-  "notAvailable": "غير متوفر حاليا"
+    "notAvailable": "غير متاح",
+  "enterYourUsernameOrGmail": "أدخل اسم المستخدم أو Gmail الخاص بك",
+  "identifierRequired": "اسم المستخدم أو البريد الإلكتروني مطلوب",
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "usernameRequired": "اسم المستخدم مطلوب",
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "invalidGmailAddress": "يرجى إدخال عنوان Gmail صحيح",
+  "passwordAtLeast8Characters": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+  "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح",
+  "pleaseAcceptTermsAndConditions": "يرجى قبول الشروط والأحكام",
+  "loginButton": "تسجيل الدخول",
+  "asteriskPlaceholder": "********"
 }
 
 

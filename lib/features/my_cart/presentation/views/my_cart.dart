@@ -2,8 +2,6 @@ import 'package:e_commerce_final/core/utils/extensions.dart';
 import 'package:e_commerce_final/features/my_cart/presentation/views/widgets/checkout_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:navy_wear/core/utils/extensions.dart';
-// import 'package:navy_wear/features/my_cart/presentation/views/widgets/checkout_details.dart';
 
 import '../../../../core/function/components.dart';
 import '../../../../core/utils/app_images.dart';
@@ -13,220 +11,258 @@ import '../../../../generated/l10n.dart';
 import '../cubit/my_card_cubit.dart';
 import '../cubit/my_card_state.dart';
 
-class MyCart extends StatefulWidget {
+class MyCart extends StatelessWidget {
   const MyCart({super.key});
 
   @override
-  State<MyCart> createState() => _MyCartState();
-}
-
-class _MyCartState extends State<MyCart> {
-  @override
   Widget build(BuildContext context) {
     final l = S.of(context);
-    return BlocProvider(
-      create: (context) => MyCartCubit()..getItems(),
-      child: BlocConsumer<MyCartCubit, MyCartState>(
-        listener: (BuildContext context, MyCartState state) {},
-        builder: (BuildContext context, MyCartState state) {
-          var cubit = BlocProvider.of<MyCartCubit>(context);
-
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('${cubit.myCardItems.length} ${l.itemAtCart}',
-                            style: AppStyles.styleMedium18(context)),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            l.seeAll,
-                            textAlign: TextAlign.right,
-                            style: AppStyles.styleMedium16(context).copyWith(
+    return SafeArea(
+      child: BlocBuilder<MyCartCubit, MyCartState>(
+        builder: (context, state) {
+          final cubit = MyCartCubit.get(context);
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${cubit.myCardItems.length} ${l.itemAtCart}',
+                        style: AppStyles.styleMedium18(context),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          l.seeAll,
+                          textAlign: TextAlign.right,
+                          style: AppStyles.styleMedium16(context).copyWith(
+                            color: isAppDarkMode()
+                                ? kDarkPrimaryColor
+                                : kLightPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                if (cubit.myCardItems.isEmpty)
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Text(l.yourCartIsEmpty),
+                    ),
+                  )
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: 16.psh,
+                    itemCount: cubit.myCardItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = cubit.myCardItems[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Dismissible(
+                          key: Key(item.id),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            decoration: ShapeDecoration(
                               color: isAppDarkMode()
                                   ? kDarkPrimaryColor
                                   : kLightPrimaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            alignment: Alignment.centerRight,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Image(image: AssetImage(AppImages.trash)),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  cubit.myCardItems.isEmpty
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              l.yourCartIsEmpty,
+                          onDismissed: (_) => cubit.removeItem(index),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 10,
                             ),
-                          ),
-                        )
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: 16.psh,
-                          itemCount: cubit.myCardItems.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Dismissible(
-                                key:
-                                    Key(cubit.myCardItems[index].id.toString()),
-                                direction: DismissDirection.endToStart,
-                                background: Container(
-                                  decoration: ShapeDecoration(
-                                    color: isAppDarkMode()
-                                        ? kDarkPrimaryColor
-                                        : kLightPrimaryColor,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                  ),
-                                  alignment: Alignment.centerRight,
-                                  child: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: Image(
-                                        image: AssetImage(AppImages.trash)),
-                                  ),
-                                ),
-                                onDismissed: (direction) {
-                                  cubit.removeItem(index).then((value) {
-                                    // Optional: Show a snackbar if needed
-                                  });
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6.0, vertical: 6),
-                                  // height: 83,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: const Color(0x115A6CEA)
-                                            .withOpacity(.07),
-                                        blurRadius: 50,
-                                        offset: const Offset(12, 26),
-                                        spreadRadius: 0,
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: isAppDarkMode()
-                                        ? kLightSecondColor
-                                        : kWhiteColor,
-                                  ),
-                                  child: Row(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0x115A6CEA)
+                                      .withOpacity(.07),
+                                  blurRadius: 50,
+                                  offset: const Offset(12, 26),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                              color: isAppDarkMode()
+                                  ? kLightSecondColor
+                                  : kWhiteColor,
+                            ),
+                            child: Row(
+                              children: [
+                                _CartItemImage(imageUrl: item.image),
+                                const SizedBox(width: 20),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Image.asset(
-                                        cubit.myCardItems[index].image,
-                                        fit: BoxFit.cover,
-                                        width: 55,
-                                        height: 55,
-                                      ),
-                                      const SizedBox(width: 20),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              cubit.myCardItems[index].name,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              style: AppStyles.styleMedium16(
-                                                      context)
-                                                  .copyWith(
-                                                color: isAppDarkMode()
-                                                    ? kDarkThirdColor
-                                                    : kLightThirdColor,
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  '\$ ${cubit.myCardItems[index].price}',
-                                                  style:
-                                                      AppStyles.styleMedium16(
-                                                              context)
-                                                          .copyWith(
-                                                    color: isAppDarkMode()
-                                                        ? kDarkPrimaryColor
-                                                        : kLightPrimaryColor,
-                                                  ),
-                                                ),
-                                                const Spacer(),
-                                                Row(
-                                                  children: [
-                                                    IconButton(
-                                                      icon: Icon(
-                                                        Icons.remove,
-                                                        color: isAppDarkMode()
-                                                            ? kDarkSecondColor
-                                                            : kLightSecondColor,
-                                                        size: 15,
-                                                      ),
-                                                      onPressed: () {
-                                                        // Reduce quantity logic
-                                                      },
-                                                      padding: EdgeInsets.zero,
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 8.0),
-                                                      child: Text(
-                                                        cubit.myCardItems[index]
-                                                            .numOfPieces
-                                                            .toString(),
-                                                        style: AppStyles
-                                                            .styleSemiBold14(
-                                                                context),
-                                                      ),
-                                                    ),
-                                                    IconButton(
-                                                      icon: Icon(
-                                                        Icons.add,
-                                                        color: isAppDarkMode()
-                                                            ? kDarkSecondColor
-                                                            : kLightSecondColor,
-                                                        size: 16,
-                                                      ),
-                                                      onPressed: () {
-                                                        // Increase quantity logic
-                                                      },
-                                                      padding: EdgeInsets.zero,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      Text(
+                                        item.name,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        style:
+                                            AppStyles.styleMedium16(context)
+                                                .copyWith(
+                                          color: isAppDarkMode()
+                                              ? kDarkThirdColor
+                                              : kLightThirdColor,
                                         ),
                                       ),
+                                      const SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '\$ ${(item.price * item.numOfPieces).toStringAsFixed(2)}',
+                                            style:
+                                                AppStyles.styleMedium16(context)
+                                                    .copyWith(
+                                              color: isAppDarkMode()
+                                                  ? kDarkPrimaryColor
+                                                  : kLightPrimaryColor,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          _QuantityButton(
+                                            icon: Icons.remove,
+                                            onPressed: () => cubit
+                                                .decrementQuantity(item.id),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text(
+                                              item.numOfPieces.toString(),
+                                              style:
+                                                  AppStyles.styleSemiBold14(
+                                                      context),
+                                            ),
+                                          ),
+                                          _QuantityButton(
+                                            icon: Icons.add,
+                                            onPressed: () => cubit
+                                                .incrementQuantity(item.id),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              ],
+                            ),
+                          ),
                         ),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: 24.psh,
-                    child: const CheckoutDetails(),
+                      );
+                    },
                   ),
-                ],
-              ),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: 24.psh,
+                  child: const CheckoutDetails(),
+                ),
+              ],
             ),
           );
         },
       ),
+    );
+  }
+}
+
+class _CartItemImage extends StatelessWidget {
+  const _CartItemImage({required this.imageUrl});
+
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    if (imageUrl.isEmpty) {
+      return _placeholder(context);
+    }
+
+    if (imageUrl.startsWith('http')) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.network(
+          imageUrl,
+          width: 55,
+          height: 55,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => _placeholder(context),
+        ),
+      );
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Image.asset(
+        imageUrl,
+        width: 55,
+        height: 55,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => _placeholder(context),
+      ),
+    );
+  }
+
+  Widget _placeholder(BuildContext context) {
+    return Container(
+      width: 55,
+      height: 55,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: isAppDarkMode()
+            ? kDarkColor.withOpacity(.3)
+            : const Color(0xffF5F5F5),
+      ),
+      child: Icon(
+        Icons.image_not_supported_outlined,
+        size: 18,
+        color: isAppDarkMode()
+            ? kDarkThirdColor
+            : kLightThirdColor.withOpacity(.7),
+      ),
+    );
+  }
+}
+
+class _QuantityButton extends StatelessWidget {
+  const _QuantityButton({required this.icon, required this.onPressed});
+
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        icon,
+        color: isAppDarkMode() ? kDarkSecondColor : kLightSecondColor,
+        size: 18,
+      ),
+      onPressed: onPressed,
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
     );
   }
 }

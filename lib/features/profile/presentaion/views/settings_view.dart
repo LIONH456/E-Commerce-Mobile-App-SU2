@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:e_commerce_final/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
-// import 'package:navy_wear/core/utils/extensions.dart';
 
 import '../../../../core/function/components.dart';
 import '../../../../core/function/custom_app_bar.dart';
@@ -28,8 +29,9 @@ class SettingsView extends StatelessWidget {
             Text(
               l.preferences,
               style: AppStyles.styleMedium14(context).copyWith(
-                color:
-                    isAppDarkMode() ? kDarkThirdColor : const Color(0xff646568),
+                color: isAppDarkMode()
+                    ? kDarkThirdColor
+                    : const Color(0xff646568),
               ),
             ),
             16.sbh,
@@ -41,17 +43,19 @@ class SettingsView extends StatelessWidget {
                   const Spacer(),
                   Text(
                     l.usa,
-                    style: AppStyles.styleMedium14(context)
-                        .copyWith(color: const Color(0xff909193)),
+                    style: AppStyles.styleMedium14(
+                      context,
+                    ).copyWith(color: const Color(0xff909193)),
                   ),
                   12.sbw,
                   Icon(
-                      isLanguageRTL()
-                          ? Icons.keyboard_arrow_left_outlined
-                          : Icons.keyboard_arrow_right_outlined,
-                      color: isAppDarkMode()
-                          ? kDarkSecondColor
-                          : kLightSecondColor),
+                    isLanguageRTL()
+                        ? Icons.keyboard_arrow_left_outlined
+                        : Icons.keyboard_arrow_right_outlined,
+                    color: isAppDarkMode()
+                        ? kDarkSecondColor
+                        : kLightSecondColor,
+                  ),
                 ],
               ),
             ),
@@ -61,9 +65,10 @@ class SettingsView extends StatelessWidget {
                 Text(
                   l.language,
                   style: AppStyles.styleMedium14(context).copyWith(
-                      color: isAppDarkMode()
-                          ? kDarkSecondColor
-                          : kLightSecondColor),
+                    color: isAppDarkMode()
+                        ? kDarkSecondColor
+                        : kLightSecondColor,
+                  ),
                 ),
                 const Spacer(),
                 DropdownButton<LanguageModel>(
@@ -78,8 +83,9 @@ class SettingsView extends StatelessWidget {
                       value: lang,
                       child: Text(
                         lang.langName,
-                        style: AppStyles.styleMedium14(context)
-                            .copyWith(color: const Color(0xff909193)),
+                        style: AppStyles.styleMedium14(
+                          context,
+                        ).copyWith(color: const Color(0xff909193)),
                       ),
                     );
                   }).toList(),
@@ -87,7 +93,38 @@ class SettingsView extends StatelessWidget {
                     if (selectedLang != null &&
                         CachedHelper.getData(kAppLanguage) !=
                             selectedLang.langCode) {
-                      changeAppLanguage(context, selectedLang.langCode);
+                      // Show confirmation dialog before restarting
+                      if (!context.mounted) return;
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text(l.language),
+                          content: Text(l.languageChangeRestartMessage),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(ctx),
+                              child: Text(l.cancel),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(ctx);
+                                changeAppLanguage(
+                                  context,
+                                  selectedLang.langCode,
+                                );
+                                // Close the app immediately to apply language change
+                                Future.delayed(
+                                  const Duration(milliseconds: 300),
+                                  () {
+                                    exit(0);
+                                  },
+                                );
+                              },
+                              child: Text(l.continuee),
+                            ),
+                          ],
+                        ),
+                      );
                     }
                   },
                   underline: const SizedBox(),
@@ -95,8 +132,9 @@ class SettingsView extends StatelessWidget {
                     isLanguageRTL()
                         ? Icons.keyboard_arrow_left_outlined
                         : Icons.keyboard_arrow_right_outlined,
-                    color:
-                        isAppDarkMode() ? kDarkSecondColor : kLightSecondColor,
+                    color: isAppDarkMode()
+                        ? kDarkSecondColor
+                        : kLightSecondColor,
                   ),
                 ),
               ],
@@ -105,9 +143,10 @@ class SettingsView extends StatelessWidget {
             Text(
               l.applicationSettings,
               style: AppStyles.styleMedium14(context).copyWith(
-                  color: isAppDarkMode()
-                      ? kDarkThirdColor
-                      : const Color(0xff646568)),
+                color: isAppDarkMode()
+                    ? kDarkThirdColor
+                    : const Color(0xff646568),
+              ),
             ),
             16.sbh,
             Row(
@@ -115,9 +154,10 @@ class SettingsView extends StatelessWidget {
                 Text(
                   l.notifications,
                   style: AppStyles.styleMedium14(context).copyWith(
-                      color: isAppDarkMode()
-                          ? kDarkSecondColor
-                          : kLightSecondColor),
+                    color: isAppDarkMode()
+                        ? kDarkSecondColor
+                        : kLightSecondColor,
+                  ),
                 ),
                 const Spacer(),
                 Switch(value: true, onChanged: (_) {}),
@@ -129,14 +169,21 @@ class SettingsView extends StatelessWidget {
                 Text(
                   l.darkMode,
                   style: AppStyles.styleMedium14(context).copyWith(
-                      color: isAppDarkMode()
-                          ? kDarkSecondColor
-                          : kLightSecondColor),
+                    color: isAppDarkMode()
+                        ? kDarkSecondColor
+                        : kLightSecondColor,
+                  ),
                 ),
                 const Spacer(),
                 Switch(
                   value: CachedHelper.getData(kAppTheme) == kDark,
-                  onChanged: (_) => toggleAppTheme(context),
+                  onChanged: (_) {
+                    toggleAppTheme(context);
+                    // Close app to apply theme change immediately
+                    Future.delayed(const Duration(milliseconds: 300), () {
+                      exit(0);
+                    });
+                  },
                 ),
               ],
             ),
@@ -144,9 +191,10 @@ class SettingsView extends StatelessWidget {
             Text(
               l.support,
               style: AppStyles.styleMedium14(context).copyWith(
-                  color: isAppDarkMode()
-                      ? kDarkThirdColor
-                      : const Color(0xff646568)),
+                color: isAppDarkMode()
+                    ? kDarkThirdColor
+                    : const Color(0xff646568),
+              ),
             ),
             24.sbh,
             _buildRow(
@@ -177,22 +225,23 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(BuildContext context,
-      {required String title, void Function()? onTap}) {
+  Widget _buildRow(
+    BuildContext context, {
+    required String title,
+    void Function()? onTap,
+  }) {
     return InkWell(
       onTap: onTap ?? () {},
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: AppStyles.styleMedium14(context),
-          ),
+          Text(title, style: AppStyles.styleMedium14(context)),
           Icon(
-              isLanguageRTL()
-                  ? Icons.keyboard_arrow_left_outlined
-                  : Icons.keyboard_arrow_right_outlined,
-              color: isAppDarkMode() ? kDarkSecondColor : kLightSecondColor),
+            isLanguageRTL()
+                ? Icons.keyboard_arrow_left_outlined
+                : Icons.keyboard_arrow_right_outlined,
+            color: isAppDarkMode() ? kDarkSecondColor : kLightSecondColor,
+          ),
         ],
       ),
     );

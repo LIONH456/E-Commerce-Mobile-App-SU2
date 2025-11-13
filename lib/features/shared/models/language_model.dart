@@ -23,12 +23,21 @@ final List<LanguageModel> supportedLanguages = [
     isDefault: true,
   ),
   LanguageModel(
-    langCode: 'ar',
-    langName: 'العربية',
-    direction: TextDirection.rtl,
+    langCode: 'km',
+    langName: 'ភាសាខ្មែរ',
+    direction: TextDirection.ltr,
+    isDefault: false,
   ),
-  // Add more languages as needed
-  // LanguageModel(langCode: 'fr', langName: 'Français', direction: TextDirection.ltr),
+  // NOTE: 2025-11-13 – Arabic locale files remain in the project, but the UI
+  //       option is hidden. To re-enable Arabic in the app, uncomment the block
+  //       below and regenerate the localization delegates.
+  // LanguageModel(
+  //   langCode: 'ar',
+  //   langName: 'العربية',
+  //   direction: TextDirection.rtl,
+  // ),
+  // Example placeholder for adding future languages:
+  // LanguageModel(langCode: 'km', langName: 'ភាសាខ្មែរ', direction: TextDirection.ltr),
 ];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

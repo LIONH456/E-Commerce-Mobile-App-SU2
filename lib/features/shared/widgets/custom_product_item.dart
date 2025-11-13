@@ -11,11 +11,13 @@ import '../../home/data/models/product_model.dart';
 class CustomProductItem extends StatelessWidget {
   final ProductModel item;
   final bool isFavorite;
+  final VoidCallback? onAddToCart;
 
   const CustomProductItem({
     required this.item,
     super.key,
     this.isFavorite = false,
+    this.onAddToCart,
   });
 
   @override
@@ -107,15 +109,18 @@ class CustomProductItem extends StatelessWidget {
                                         ? kDarkSecondColor
                                         : kLightThirdColor,
                                   )
-                                : Center(
-                                    child: SvgPicture.asset(
-                                      AppImages.bag,
-                                      width: 18,
-                                      colorFilter: ColorFilter.mode(
-                                        isAppDarkMode()
-                                            ? kDarkSecondColor
-                                            : kLightThirdColor,
-                                        BlendMode.srcIn,
+                                : InkWell(
+                                    onTap: onAddToCart,
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                        AppImages.bag,
+                                        width: 18,
+                                        colorFilter: ColorFilter.mode(
+                                          isAppDarkMode()
+                                              ? kDarkSecondColor
+                                              : kLightThirdColor,
+                                          BlendMode.srcIn,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -165,7 +170,7 @@ class CustomProductItem extends StatelessWidget {
 
   Widget _buildProductImage(BuildContext context) {
     if (item.image.isEmpty) {
-      return _buildPlaceholder();
+      return _buildPlaceholder(context);
     }
 
     if (item.image.startsWith('http')) {
@@ -182,27 +187,46 @@ class CustomProductItem extends StatelessWidget {
             ),
           );
         },
-        errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+        errorBuilder: (context, error, stackTrace) => _buildPlaceholder(context),
       );
     }
 
     return Image.asset(
       item.image,
       fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+      errorBuilder: (context, error, stackTrace) => _buildPlaceholder(context),
     );
   }
 
-  Widget _buildPlaceholder() {
+  Widget _buildPlaceholder(BuildContext context) {
     return Container(
-      color: isAppDarkMode()
-          ? kDarkColor.withOpacity(.4)
-          : const Color(0xffF5F5F5),
-      child: Icon(
-        Icons.image_not_supported_outlined,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
         color: isAppDarkMode()
-            ? kDarkThirdColor
-            : kLightThirdColor.withOpacity(.7),
+            ? kDarkColor.withOpacity(.3)
+            : const Color(0xffF5F5F5),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.image_not_supported_outlined,
+            color: isAppDarkMode()
+                ? kDarkThirdColor
+                : kLightThirdColor.withOpacity(.7),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Image unavailable',
+            style: AppStyles.styleRegular11(context).copyWith(
+              color: isAppDarkMode()
+                  ? kDarkThirdColor
+                  : kLightThirdColor.withOpacity(.7),
+            ),
+          ),
+        ],
       ),
     );
   }

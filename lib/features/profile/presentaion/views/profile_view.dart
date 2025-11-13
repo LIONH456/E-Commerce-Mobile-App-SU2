@@ -1,5 +1,6 @@
 import 'package:e_commerce_final/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:navy_wear/core/utils/extensions.dart';
 
@@ -10,12 +11,16 @@ import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/constant.dart';
 import '../../../../core/widgets/custom_buttons.dart';
 import '../../../../generated/l10n.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authState = context.watch<AuthCubit>().state;
+    final username = authState.user?.username ?? 'Guest';
+    final email = authState.user?.email ?? 'guest@example.com';
     return SingleChildScrollView(
       padding: 24.psh,
       child: Column(
@@ -66,7 +71,7 @@ class ProfileView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Chanbora',
+                username,
                 style: AppStyles.styleSemiBold18(context).copyWith(
                     color: isAppDarkMode()
                         ? kDarkSecondColor
@@ -78,7 +83,7 @@ class ProfileView extends StatelessWidget {
           ),
           6.sbh,
           Text(
-            'Shopping@gmail.com',
+            email,
             style: AppStyles.styleRegular14(context).copyWith(
                 color: isAppDarkMode()
                     ? const Color(0xffD0D0D0)
@@ -191,7 +196,10 @@ class GeneralWidgets extends StatelessWidget {
                       style: AppStyles.styleSemiBold14(context)
                           .copyWith(color: const Color(0xffD32F2F)),
                     ),
-                    onPressed: () => router.go(AppRoutes.login),
+                    onPressed: () {
+                      context.read<AuthCubit>().logout();
+                      router.go(AppRoutes.login);
+                    },
                   ),
                 ],
               ),

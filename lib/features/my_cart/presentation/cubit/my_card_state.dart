@@ -5,3 +5,7 @@ class MyCardInitial extends MyCartState {}
 class GetItems extends MyCartState {}
 
 class ItemRemoved extends MyCartState {}
+
+class ItemAdded extends MyCartState {}
+
+class ItemUpdated extends MyCartState {}

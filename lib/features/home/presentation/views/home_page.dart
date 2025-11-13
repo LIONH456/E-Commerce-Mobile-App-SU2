@@ -13,7 +13,9 @@ import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/constant.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../generated/l10n.dart';
+import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../shared/widgets/custom_product_item.dart';
+import '../../../my_cart/presentation/cubit/my_card_cubit.dart';
 import '../cubits/home_page_cubit/home_page_cubit.dart';
 import '../cubits/home_page_cubit/home_page_state.dart';
 import 'widgets/custom_drawer.dart';
@@ -29,10 +31,12 @@ class HomePage extends StatelessWidget {
         builder: (BuildContext context, state) {
           var cubit = BlocProvider.of<HomePageCubit>(context);
           final l = S.of(context);
+          final authState = context.watch<AuthCubit>().state;
+          final userName = authState.user?.username ?? 'Guest';
 
           return Scaffold(
             key: cubit.scaffoldKey,
-            appBar: _buildHomeAppBar(l, context, cubit),
+            appBar: _buildHomeAppBar(l, context, cubit, userName),
             drawer: const CustomDrawer(),
             body: NestedScrollView(
               headerSliverBuilder:
@@ -157,9 +161,20 @@ class HomePage extends StatelessWidget {
         final product = cubit.products.products[index];
         return GestureDetector(
           onTap: () {
-            router.push(AppRoutes.productDetails, extra: product.image);
+            router.push(AppRoutes.productDetails, extra: product);
           },
-          child: CustomProductItem(item: product),
+          child: CustomProductItem(
+            item: product,
+            onAddToCart: () {
+              MyCartCubit.get(context).addToCart(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 1),
+                  content: Text('${product.name} added to cart'),
+                ),
+              );
+            },
+          ),
         );
       },
     );
@@ -228,14 +243,22 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar _buildHomeAppBar(S l, BuildContext context, HomePageCubit cubit) {
+  AppBar _buildHomeAppBar(
+    S l,
+    BuildContext context,
+    HomePageCubit cubit,
+    String userName,
+  ) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l.helloMahmoud, style: AppStyles.styleSemiBold14(context)),
+          Text(
+            'Hello, $userName',
+            style: AppStyles.styleSemiBold14(context),
+          ),
           Text(
             l.letsExplore,
             style: AppStyles.styleRegular14(context).copyWith(

@@ -46,4 +46,19 @@ class CategoryModel {
           : null,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'description': description,
+      'image': image,
+      'parent_id': parentId,
+      'is_active': isActive,
+      'sort_order': sortOrder,
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
+    };
+  }
 }

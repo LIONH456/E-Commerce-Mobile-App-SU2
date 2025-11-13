@@ -27,6 +27,8 @@ const String kAppLanguage = 'appLanguage';
 const String kAppTheme = 'appTheme';
 const String kDark = 'dark';
 const String kLight = 'light';
+const String kUserProfile = 'userProfile';
+const String kCartItemsStorageKey = 'cartItems';
 
 // API
 const String kApiBaseUrl = 'https://su12ecommerce.lionh456.uk/api/';

@@ -226,6 +226,7 @@
   "forgetPassword": "Forget Password?",
   "continuee": "Continue",
   "register": "Register",
+  "loginButton": "Login",
   "enterYourEmailThenWeWillSendYouOTP": "Enter your Email then we will send you OTP to reset new password.",
   "pleaseWait": "Please Wait",
   "enterYourNawPasswordRememberThisTime": "Enter your naw password , Remember this time!",
@@ -282,5 +283,18 @@
   "accessibility": "Accessibility",
   "skip": "Skip",
   "arabic": "Arabic",
-  "notAvailable": "Not Available"
+  "notAvailable": "Not Available",
+  "enterYourUsernameOrGmail": "Enter your username or Gmail",
+  "identifierRequired": "Username or email is required",
+  "passwordRequired": "Password is required",
+  "usernameRequired": "Username is required",
+  "emailRequired": "Email is required",
+  "invalidGmailAddress": "Please enter a valid Gmail address",
+  "passwordAtLeast8Characters": "Password must be at least 8 characters long",
+  "accountCreatedSuccessfully": "Account created successfully",
+  "pleaseAcceptTermsAndConditions": "Please accept the terms and conditions",
+  "loginButton": "Login",
+  "asteriskPlaceholder": "********",
+  "languageChangeRestartMessage": "Language will be changed. The app will close to apply the changes.",
+  "khmer": "Khmer"
 }

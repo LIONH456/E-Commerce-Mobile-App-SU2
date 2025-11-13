@@ -9,6 +9,7 @@ import '../../features/auth/presentation/views/welcome_view.dart';
 import '../../features/home/presentation/views/all_review.dart';
 import '../../features/home/presentation/views/new_fashion_view.dart';
 import '../../features/home/presentation/views/product_details.dart';
+import '../../features/home/data/models/product_model.dart';
 import '../../features/home/presentation/views/write_review_screen.dart';
 import '../../features/my_cart/presentation/views/checkout_view.dart';
 import '../../features/notifications&messages/presentation/views/chat_view.dart';
@@ -126,10 +127,12 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.productDetails,
       pageBuilder: (BuildContext context, GoRouterState state) {
-        final String images = state.extra! as String;
+        final product = state.extra as ProductModel?;
         return FadeThroughTransitionPageWrapper(
           transitionKey: state.pageKey,
-          page: ProductDetails(image: images),
+          page: product == null
+              ? const SizedBox.shrink()
+              : ProductDetails(item: product),
         );
       },
     ),

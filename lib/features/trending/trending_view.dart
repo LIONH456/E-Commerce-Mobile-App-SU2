@@ -1,15 +1,16 @@
 import 'package:e_commerce_final/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:navy_wear/core/utils/extensions.dart';
 
 import '../../core/function/components.dart';
 import '../../core/utils/app_routes.dart';
 import '../../core/utils/app_styles.dart';
 import '../../core/utils/constant.dart';
 import '../../generated/l10n.dart';
+import '../home/data/models/product_model.dart';
 import '../home/presentation/cubits/home_page_cubit/home_page_cubit.dart';
 import '../home/presentation/cubits/home_page_cubit/home_page_state.dart';
+import '../my_cart/presentation/cubit/my_card_cubit.dart';
 import '../shared/widgets/custom_product_item.dart';
 
 class TrendingView extends StatelessWidget {
@@ -18,160 +19,79 @@ class TrendingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = S.of(context);
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 16,
-          elevation: 0,
-          backgroundColor:
-              isAppDarkMode() ? kLightSecondColor : Colors.transparent,
-          bottom: TabBar(
-            indicatorColor:
-                isAppDarkMode() ? kDarkPrimaryColor : kLightPrimaryColor,
-            indicatorWeight: 3,
-            labelColor:
-                isAppDarkMode() ? kDarkSecondColor : const Color(0xff222222),
-            unselectedLabelColor:
-                isAppDarkMode() ? kDarkSecondColor : const Color(0xff222222),
-            labelStyle:
-                const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            unselectedLabelStyle:
-                const TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-            tabs: [
-              Tab(text: l.women),
-              Tab(text: l.men),
-              Tab(text: l.kids),
-            ],
-          ),
-        ),
-        body: const TabBarView(
-          children: [
-            TapBAr1(),
-            TapBAr1(),
-            TapBAr1(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TapBAr1 extends StatefulWidget {
-  const TapBAr1({super.key});
-
-  @override
-  State<TapBAr1> createState() => _TapBAr1State();
-}
-
-class _TapBAr1State extends State<TapBAr1> {
-  int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = S.of(context);
     return BlocProvider(
-      create: (context) => HomePageCubit()..loadInitialData(),
+      create: (_) => HomePageCubit()..loadInitialData(),
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
-          final cubit = BlocProvider.of<HomePageCubit>(context);
-          return Column(
-            children: [
-              24.sbh,
-              SizedBox(
-                height: 32,
-                child: Align(
-                  alignment: isLanguageRTL()
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: ListView(
-                    padding: 24.ps,
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: [
-                      Padding(
-                        padding: 10.pe,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: () {
-                            if (_currentIndex == 0) return;
-                            setState(() {
-                              _currentIndex = 0;
-                            });
-                          },
-                          child: _customContainer(
-                              title: l.all, isSelected: _currentIndex == 0),
-                        ),
-                      ),
-                      Padding(
-                        padding: 10.pe,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: () {
-                            if (_currentIndex == 1) return;
-                            setState(() {
-                              _currentIndex = 1;
-                            });
-                          },
-                          child: _customContainer(
-                              title: l.tShirt, isSelected: _currentIndex == 1),
-                        ),
-                      ),
-                      Padding(
-                        padding: 10.pe,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: () {
-                            if (_currentIndex == 2) return;
-                            setState(() {
-                              _currentIndex = 2;
-                            });
-                          },
-                          child: _customContainer(
-                              title: l.shoes, isSelected: _currentIndex == 2),
-                        ),
-                      ),
-                      Padding(
-                        padding: 10.pe,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: () {
-                            if (_currentIndex == 3) return;
-                            setState(() {
-                              _currentIndex = 3;
-                            });
-                          },
-                          child: _customContainer(
-                              title: l.blazers, isSelected: _currentIndex == 3),
-                        ),
-                      ),
-                    ],
-                  ),
+          final cubit = HomePageCubit.get(context);
+          final isLoading = cubit.isProductsLoading && cubit.products.products.isEmpty;
+
+          return DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                toolbarHeight: 16,
+                elevation: 0,
+                backgroundColor:
+                    isAppDarkMode() ? kLightSecondColor : Colors.transparent,
+                bottom: TabBar(
+                  indicatorColor:
+                      isAppDarkMode() ? kDarkPrimaryColor : kLightPrimaryColor,
+                  indicatorWeight: 3,
+                  labelColor: isAppDarkMode()
+                      ? kDarkSecondColor
+                      : const Color(0xff222222),
+                  unselectedLabelColor: isAppDarkMode()
+                      ? kDarkSecondColor
+                      : const Color(0xff222222),
+                  labelStyle:
+                      const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                  tabs: [
+                    Tab(text: l.women),
+                    Tab(text: l.men),
+                    Tab(text: l.kids),
+                  ],
                 ),
               ),
-              16.sbh,
-              Expanded(
-                child: _buildProductGrid(cubit, context, l),
-              ),
-            ],
+              body: isLoading
+                  ? const Center(
+                      child: SizedBox(
+                        width: 28,
+                        height: 28,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    )
+                  : TabBarView(
+                      children: [
+                        _TrendingGrid(slugs: const ['woman']),
+                        _TrendingGrid(slugs: const ['men']),
+                        _TrendingGrid(slugs: const ['girl', 'boy']),
+                      ],
+                    ),
+            ),
           );
         },
       ),
     );
   }
+}
 
-  Widget _buildProductGrid(HomePageCubit cubit, BuildContext context, S l) {
-    if (cubit.isProductsLoading && cubit.products.products.isEmpty) {
-      return const Center(
-        child: SizedBox(
-          width: 28,
-          height: 28,
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
-      );
-    }
+class _TrendingGrid extends StatelessWidget {
+  const _TrendingGrid({required this.slugs});
 
-    if (cubit.productsError != null && cubit.products.products.isEmpty) {
+  final List<String> slugs;
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = HomePageCubit.get(context);
+    final l = S.of(context);
+
+    final List<ProductModel> products =
+        cubit.getProductsForParentSlugs(slugs);
+
+    if (cubit.productsError != null && products.isEmpty) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -196,7 +116,7 @@ class _TapBAr1State extends State<TapBAr1> {
       );
     }
 
-    if (cubit.products.products.isEmpty) {
+    if (products.isEmpty) {
       return Center(
         child: Text(
           l.notAvailable,
@@ -206,64 +126,37 @@ class _TapBAr1State extends State<TapBAr1> {
     }
 
     final crossAxisCount = (context.screenWidth / 200).round();
-    final safeCrossAxisCount = crossAxisCount < 1
-        ? 1
-        : (crossAxisCount > 4 ? 4 : crossAxisCount);
+    final safeCrossAxisCount =
+        crossAxisCount < 1 ? 1 : (crossAxisCount > 4 ? 4 : crossAxisCount);
 
     return GridView.builder(
       padding: 24.psh,
-      itemCount: cubit.products.products.length,
+      itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: safeCrossAxisCount,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
-        childAspectRatio: 0.6, // Portrait aspect ratio for vertical images
+        childAspectRatio: 0.6,
       ),
       itemBuilder: (BuildContext context, int index) {
+        final product = products[index];
         return GestureDetector(
-          onTap: () {
-            router.push(
-              AppRoutes.productDetails,
-              extra: cubit.products.products[index].image,
-            );
-          },
+          onTap: () =>
+              router.push(AppRoutes.productDetails, extra: product),
           child: CustomProductItem(
-            item: cubit.products.products[index],
+            item: product,
+            onAddToCart: () {
+              MyCartCubit.get(context).addToCart(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 1),
+                  content: Text('${product.name} added to cart'),
+                ),
+              );
+            },
           ),
         );
       },
-    );
-  }
-
-  Widget _customContainer({required String title, required bool isSelected}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      height: 32,
-      decoration: BoxDecoration(
-        color: isSelected
-            ? isAppDarkMode()
-                ? kDarkPrimaryColor
-                : kLightPrimaryColor
-            : Colors.transparent,
-        border: isSelected
-            ? null
-            : Border.all(
-                color:
-                    isAppDarkMode() ? kDarkPrimaryColor : kLightPrimaryColor),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Text(
-        title,
-        style: AppStyles.styleMedium14(context).copyWith(
-          color: isSelected
-              ? kWhiteColor
-              : (isAppDarkMode()
-                  ? const Color(0xffDAE8FF)
-                  : isAppDarkMode()
-                      ? kDarkPrimaryColor
-                      : kLightPrimaryColor),
-        ),
-      ),
     );
   }
 }

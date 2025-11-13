@@ -5,7 +5,7 @@ String resolveMediaUrl(String? path) {
     return '';
   }
 
-  final normalized = path.trim();
+  final normalized = path.replaceAll('"', '').trim();
   if (normalized.isEmpty) {
     return '';
   }

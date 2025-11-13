@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutShopapay": MessageLookupByLibrary.simpleMessage("عن التطبيق"),
     "accessibility": MessageLookupByLibrary.simpleMessage("الوصول للمحتوى"),
+    "accountCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب بنجاح",
+    ),
     "addAddress": MessageLookupByLibrary.simpleMessage("إضافة عنوان"),
     "addCard": MessageLookupByLibrary.simpleMessage("إضافة بطاقة"),
     "addDeliveryInstruction": MessageLookupByLibrary.simpleMessage(
@@ -57,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     ),
+    "asteriskPlaceholder": MessageLookupByLibrary.simpleMessage("********"),
     "bWowdWireless": MessageLookupByLibrary.simpleMessage("B.Wow\'d لاسلكي"),
     "backToHome": MessageLookupByLibrary.simpleMessage("العودة إلى الرئيسية"),
     "bangla": MessageLookupByLibrary.simpleMessage("البنغالية"),
@@ -151,6 +155,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailNotifications": MessageLookupByLibrary.simpleMessage(
       "إشعارات البريد الإلكتروني",
     ),
+    "emailRequired": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني مطلوب",
+    ),
     "endOfSeason": MessageLookupByLibrary.simpleMessage("نهاية الموسم"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "enterCodeVoucher": MessageLookupByLibrary.simpleMessage(
@@ -181,6 +188,9 @@ class MessageLookup extends MessageLookupByLibrary {
           "أدخل كلمة المرور الجديدة، تذكر هذه المرة!",
         ),
     "enterYourOtp": MessageLookupByLibrary.simpleMessage("ادخل الكود الخاص بك"),
+    "enterYourUsernameOrGmail": MessageLookupByLibrary.simpleMessage(
+      "أدخل اسم المستخدم أو Gmail الخاص بك",
+    ),
     "error404": MessageLookupByLibrary.simpleMessage("خطأ 404"),
     "errorMessage": MessageLookupByLibrary.simpleMessage(
       "نحن غير متصلين حالياً. يرجى المحاولة لاحقاً.",
@@ -245,7 +255,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "كيف أبحث عن التنانير النسائية في القائمة الرئيسية؟",
     ),
     "howDoITrackOrder": MessageLookupByLibrary.simpleMessage("كيف أتابع طلبي؟"),
+    "identifierRequired": MessageLookupByLibrary.simpleMessage(
+      "اسم المستخدم أو البريد الإلكتروني مطلوب",
+    ),
     "instagram": MessageLookupByLibrary.simpleMessage("إنستغرام"),
+    "invalidGmailAddress": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال عنوان Gmail صحيح",
+    ),
     "italian": MessageLookupByLibrary.simpleMessage("الإيطالية"),
     "itemAtCart": MessageLookupByLibrary.simpleMessage("عنصر في السلة"),
     "items": MessageLookupByLibrary.simpleMessage("عنصرًا"),
@@ -281,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "logOutConfirmation": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     ),
+    "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "قم بتسجيل الدخول للوصول إلى تجربة تسوقك الشخصية",
     ),
@@ -317,7 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "لم يتم العثور على نتائج",
     ),
     "nonStretch": MessageLookupByLibrary.simpleMessage("غير مرن"),
-    "notAvailable": MessageLookupByLibrary.simpleMessage("غير متوفر حاليا"),
+    "notAvailable": MessageLookupByLibrary.simpleMessage("غير متاح"),
     "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "online": MessageLookupByLibrary.simpleMessage("متصل"),
@@ -328,6 +345,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "otpVerification": MessageLookupByLibrary.simpleMessage("تحقق OTP"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordAtLeast8Characters": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    ),
+    "passwordRequired": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور مطلوبة",
+    ),
     "patrickRaddenKeefeReviewer": MessageLookupByLibrary.simpleMessage(
       "المراجع: باتريك رادن كيف وديفيد جروب وجاري دي لاندر",
     ),
@@ -336,6 +359,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "paymentMethods": MessageLookupByLibrary.simpleMessage("طرق الدفع"),
     "placeDoesntExist": MessageLookupByLibrary.simpleMessage(
       "المكان غير موجود",
+    ),
+    "pleaseAcceptTermsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "يرجى قبول الشروط والأحكام",
     ),
     "pleaseWait": MessageLookupByLibrary.simpleMessage("الرجاء الانتظار"),
     "pleatFrontTop": MessageLookupByLibrary.simpleMessage("قميص بثنيات أمامية"),
@@ -454,6 +480,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
     "upTo30Off": MessageLookupByLibrary.simpleMessage("تخفيض حتى 30%"),
     "usa": MessageLookupByLibrary.simpleMessage("الولايات المتحدة"),
+    "usernameRequired": MessageLookupByLibrary.simpleMessage(
+      "اسم المستخدم مطلوب",
+    ),
     "vNeck": MessageLookupByLibrary.simpleMessage("رقبة V"),
     "vSizeLevelTop": MessageLookupByLibrary.simpleMessage("قميص بمستوى V"),
     "verify": MessageLookupByLibrary.simpleMessage("تحقق"),

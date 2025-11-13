@@ -14,6 +14,7 @@ import '../../generated/l10n.dart';
 import '../home/presentation/cubits/home_page_cubit/home_page_cubit.dart';
 import '../home/presentation/cubits/home_page_cubit/home_page_state.dart';
 import '../shared/widgets/custom_product_item.dart';
+import '../my_cart/presentation/cubit/my_card_cubit.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});
@@ -195,12 +196,21 @@ class FavoritesView extends StatelessWidget {
                             onTap: () {
                               router.push(
                                 AppRoutes.productDetails,
-                                extra: product.image,
+                                extra: product,
                               );
                             },
                             child: CustomProductItem(
                               item: product,
                               isFavorite: true,
+                              onAddToCart: () {
+                                MyCartCubit.get(context).addToCart(product);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    duration: const Duration(seconds: 1),
+                                    content: Text('${product.name} added to cart'),
+                                  ),
+                                );
+                              },
                             ),
                           );
                         },

@@ -7,11 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:e_commerce_final/core/utils/local_network.dart';
 
 import 'package:e_commerce_final/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Initialize cached helper (SharedPreferences) used by the app.
+    await CachedHelper.init();
+
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 

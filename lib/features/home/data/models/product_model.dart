@@ -69,6 +69,24 @@ class ProductModel {
           : null,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': desc,
+      'price': price,
+      'compare_price': beforeDiscount,
+      'category_id': categoryId,
+      'images': gallery,
+      'main_image': image,
+      'is_available': isAvailable,
+      'sku': sku,
+      'quantity': quantity,
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
+    };
+  }
 }
 
 class ProductsModels {
