@@ -19,7 +19,7 @@ A comprehensive, feature-rich e-commerce mobile application built with Flutter.
 **Shopapay** is a modern e-commerce mobile application that provides a complete shopping experience. The app features product browsing, shopping cart management, user authentication, payment processing, and much more. Built with Flutter for cross-platform compatibility (Android, iOS, Web, Desktop).
 
 ### Key Highlights
-- 🌍 **Multi-language Support:** English, Arabic, and French
+- 🌍 **Multi-language Support:** English and Khmer
 - 🎨 **Theme Support:** Light and Dark modes
 - 🛒 **Full Shopping Experience:** Browse, cart, checkout, and payments
 - 🔐 **Secure Authentication:** Email/password and social login
@@ -225,17 +225,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
----
-
-## 📄 License
-
-[Specify your license here]
 
 ---
 
 ## 👥 Authors
 
-- [Your Name/Team]
+- Mean Chanbora
+- Ho Jun Hong
 
 ---
 
@@ -249,7 +245,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Support
 
-For support, email [your-email] or use the Help Center in the app.
+For support, email junhongho25@gmail.com or use the Help Center in the app.
 
 ---
 
