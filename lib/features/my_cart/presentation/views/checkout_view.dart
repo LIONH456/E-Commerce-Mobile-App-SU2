@@ -166,9 +166,9 @@ class _CheckoutViewState extends State<CheckoutView> {
               Expanded(
                 child: Text(
                   location.address ?? l.loading,
-                  style: AppStyles.styleMedium14(context).copyWith(
-                    color: isAppDarkMode() ? kDarkThirdColor : null,
-                  ),
+                  style: AppStyles.styleMedium14(
+                    context,
+                  ).copyWith(color: isAppDarkMode() ? kDarkThirdColor : null),
                 ),
               ),
               16.sbw,
@@ -312,8 +312,8 @@ class _CheckoutViewState extends State<CheckoutView> {
                     border: Border.all(
                       color: isSelected
                           ? (isAppDarkMode()
-                              ? kDarkPrimaryColor
-                              : kLightPrimaryColor)
+                                ? kDarkPrimaryColor
+                                : kLightPrimaryColor)
                           : const Color(0xffE9E8EB),
                       width: 1,
                     ),
@@ -470,11 +470,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                       : kLightPrimaryColor,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.add,
-                  color: kWhiteColor,
-                  size: 20,
-                ),
+                child: const Icon(Icons.add, color: kWhiteColor, size: 20),
               ),
             ],
           ),
@@ -534,8 +530,8 @@ class _CheckoutViewState extends State<CheckoutView> {
                   ),
                   child: item.image.isNotEmpty
                       ? (item.image.startsWith('http')
-                          ? Image.network(item.image, fit: BoxFit.cover)
-                          : Image.asset(item.image, fit: BoxFit.cover))
+                            ? Image.network(item.image, fit: BoxFit.cover)
+                            : Image.asset(item.image, fit: BoxFit.cover))
                       : Icon(
                           Icons.image_not_supported_outlined,
                           color: isAppDarkMode()
@@ -606,7 +602,9 @@ class _CheckoutViewState extends State<CheckoutView> {
         child: Center(
           child: Text(
             l.continuee,
-            style: AppStyles.styleSemiBold16(context).copyWith(color: Colors.white),
+            style: AppStyles.styleSemiBold16(
+              context,
+            ).copyWith(color: Colors.white),
           ),
         ),
       ),

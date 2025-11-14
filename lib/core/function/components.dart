@@ -43,7 +43,10 @@ Future<void> toggleAppTheme(BuildContext context) async {
 
 /// Save a preference and restart the app
 Future<void> _updatePreferenceAndRestart(
-    BuildContext context, String key, dynamic value) async {
+  BuildContext context,
+  String key,
+  dynamic value,
+) async {
   await CachedHelper.saveData(key, value);
   if (context.mounted) {
     Phoenix.rebirth(context);

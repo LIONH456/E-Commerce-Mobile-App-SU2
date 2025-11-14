@@ -394,7 +394,7 @@ class ProductDetails extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          'Quantity',
+                                          l.items,
                                           style: AppStyles.styleSemiBold16(
                                             context,
                                           ),
