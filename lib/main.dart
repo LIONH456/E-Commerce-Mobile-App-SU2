@@ -10,7 +10,7 @@ import 'package:e_commerce_final/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 import 'features/my_cart/presentation/cubit/my_card_cubit.dart';
 
@@ -33,15 +33,7 @@ Future<void> main() async {
   // Lock device orientation to portrait mode
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(
-    // Phoenix(
-    //   child: DevicePreview(
-    //     enabled: kDebugMode,
-    //     builder: (context) => const MyApp(),
-    //   ),
-    // ),
-    MyApp(),
-  );
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

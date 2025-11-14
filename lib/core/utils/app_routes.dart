@@ -129,7 +129,21 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: AppRoutes.productDetails,
       pageBuilder: (BuildContext context, GoRouterState state) {
-        final product = state.extra as ProductModel?;
+        final extra = state.extra;
+        ProductModel? product;
+
+        if (extra is ProductModel) {
+          product = extra;
+        } else if (extra is Map) {
+          try {
+            product = ProductModel.fromJson(Map<String, dynamic>.from(extra));
+          } catch (_) {
+            product = null;
+          }
+        } else {
+          product = null;
+        }
+
         return FadeThroughTransitionPageWrapper(
           transitionKey: state.pageKey,
           page: product == null

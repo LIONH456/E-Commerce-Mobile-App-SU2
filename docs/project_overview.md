@@ -1,7 +1,7 @@
 # Shopapay Project Overview
 
 ## Mission & Scope
-Shopapay is a Flutter-based e-commerce experience focused on fast product discovery, streamlined checkout, and personalized engagement. The current build targets mobile platforms with responsive UI elements and multilingual support (English, Arabic, French) to increase accessibility across regions.
+Shopapay is a Flutter-based e-commerce experience focused on fast product discovery, streamlined checkout, and personalized engagement. The current build targets mobile platforms with responsive UI elements and multilingual support (English, Khmer) to increase accessibility across regions.
 
 ## Core User Journeys
 - **Onboarding:** Branded carousel introduces value propositions and drives first-time engagement.
@@ -56,7 +56,7 @@ For the complete dependency list, refer to `pubspec.yaml`.
 1. Install Flutter 3.8.1 (or newer) and clone the repository.
 2. Run `flutter pub get` to install dependencies.
 3. Execute `flutter run` (device/emulator) to launch the app.
-4. For localization changes, update the ARB files under `l10n/` and regenerate via `flutter pub run intl_utils:generate`.
+4. For localization changes, update the ARB files under `l10n/` and regenerate via `dart run intl_utils:generate`.
 
 ## Testing & Quality
 - Static analysis enforced via `flutter_lints`.
