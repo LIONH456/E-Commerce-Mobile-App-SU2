@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "បញ្ជាក់ពាក្យសម្ងាត់",
     ),
     "contactUs": MessageLookupByLibrary.simpleMessage("ទាក់ទងមកយើង"),
+    "continueShopping": MessageLookupByLibrary.simpleMessage("បន្តការទិញលើក"),
     "continueWithApple": MessageLookupByLibrary.simpleMessage(
       "បន្តជាមួយ Apple",
     ),
@@ -342,6 +343,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "newOffers": MessageLookupByLibrary.simpleMessage("ការផ្តល់ជូនថ្មីៗ"),
     "next": MessageLookupByLibrary.simpleMessage("បន្ទាប់"),
+    "noItemsSelected": MessageLookupByLibrary.simpleMessage(
+      "មិនមានការជ្រើសរើសលម្អិត",
+    ),
     "noResultsFound": MessageLookupByLibrary.simpleMessage("មិនមានលទ្ធផលទេ"),
     "nonStretch": MessageLookupByLibrary.simpleMessage("មិនយឺត"),
     "notAvailable": MessageLookupByLibrary.simpleMessage("មិនមាន"),
@@ -350,9 +354,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "online": MessageLookupByLibrary.simpleMessage("អនឡាញ"),
     "or": MessageLookupByLibrary.simpleMessage("ឬ"),
     "orText": MessageLookupByLibrary.simpleMessage("ឬ"),
+    "orderConfirmation": MessageLookupByLibrary.simpleMessage(
+      "ការបញ្ជាទិញការបញ្ជាទិញរបស់អ្នកត្រូវបានបញ្ជាក់ហើយ ហើយនឹងត្រូវបានដឹកជញ្ជូនក្នុងពេលឆាប់ៗនេះ។",
+    ),
     "orderNotifications": MessageLookupByLibrary.simpleMessage(
       "ការជូនដំណឹងការបញ្ជាទិញ",
     ),
+    "orderSuccess": MessageLookupByLibrary.simpleMessage(
+      "ការបាញ់ប្រាក់បានជោគជ័យ!",
+    ),
+    "orderSummary": MessageLookupByLibrary.simpleMessage("សង្ខេបលម្អិតលេខគណនា"),
     "otpVerification": MessageLookupByLibrary.simpleMessage(
       "ការផ្ទៀងផ្ទាត់ OTP",
     ),
@@ -476,6 +487,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "តាមរយៈការបង្កើតគណនីមួយ អ្នកយល់ព្រមនឹងលក្ខខណ្ឌរបស់យើង",
     ),
     "termsAndConditions": MessageLookupByLibrary.simpleMessage("លក្ខខណ្ឌ"),
+    "thankyouForOrder": MessageLookupByLibrary.simpleMessage(
+      "សូមអរគុណសម្រាប់ការបញ្ຂដ្ឋាននៃលើកនេះ",
+    ),
     "toResetYourPassword": MessageLookupByLibrary.simpleMessage(
       "ដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ សូមជ្រើសរើសព័ត៌មានលម្អិតទំនាក់ទំនង",
     ),

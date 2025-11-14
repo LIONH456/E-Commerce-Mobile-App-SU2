@@ -100,6 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+    "continueShopping": MessageLookupByLibrary.simpleMessage(
+      "Continue Shopping",
+    ),
     "continueWithApple": MessageLookupByLibrary.simpleMessage(
       "Continue with Apple",
     ),
@@ -330,6 +333,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "newOffers": MessageLookupByLibrary.simpleMessage("New Offers"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noItemsSelected": MessageLookupByLibrary.simpleMessage(
+      "No items selected",
+    ),
     "noResultsFound": MessageLookupByLibrary.simpleMessage("No results Found"),
     "nonStretch": MessageLookupByLibrary.simpleMessage("Non-Stretch"),
     "notAvailable": MessageLookupByLibrary.simpleMessage("Not Available"),
@@ -338,9 +344,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "online": MessageLookupByLibrary.simpleMessage("Online"),
     "or": MessageLookupByLibrary.simpleMessage("or"),
     "orText": MessageLookupByLibrary.simpleMessage("or"),
+    "orderConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Your order has been confirmed and will be shipped soon.",
+    ),
     "orderNotifications": MessageLookupByLibrary.simpleMessage(
       "Order Notifications",
     ),
+    "orderSuccess": MessageLookupByLibrary.simpleMessage("Order Successful!"),
+    "orderSummary": MessageLookupByLibrary.simpleMessage("Order Summary"),
     "otpVerification": MessageLookupByLibrary.simpleMessage("OTP Verification"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordAtLeast8Characters": MessageLookupByLibrary.simpleMessage(
@@ -459,6 +470,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "Terms and conditions",
+    ),
+    "thankyouForOrder": MessageLookupByLibrary.simpleMessage(
+      "Thank you for your order",
     ),
     "toResetYourPassword": MessageLookupByLibrary.simpleMessage(
       "To reset your password, please select contact details",

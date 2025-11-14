@@ -95,12 +95,13 @@ class MyCart extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color(0x115A6CEA)
-                                      .withOpacity(.07),
+                                  color: const Color(
+                                    0x115A6CEA,
+                                  ).withOpacity(.07),
                                   blurRadius: 50,
                                   offset: const Offset(12, 26),
                                   spreadRadius: 0,
-                                )
+                                ),
                               ],
                               borderRadius: BorderRadius.circular(12),
                               color: isAppDarkMode()
@@ -109,6 +110,13 @@ class MyCart extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
+                                Checkbox(
+                                  value: cubit.selectedItemIds.contains(
+                                    item.id,
+                                  ),
+                                  onChanged: (_) =>
+                                      cubit.toggleSelection(item.id),
+                                ),
                                 _CartItemImage(imageUrl: item.image),
                                 const SizedBox(width: 20),
                                 Expanded(
@@ -120,13 +128,12 @@ class MyCart extends StatelessWidget {
                                         item.name,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
-                                        style:
-                                            AppStyles.styleMedium16(context)
-                                                .copyWith(
-                                          color: isAppDarkMode()
-                                              ? kDarkThirdColor
-                                              : kLightThirdColor,
-                                        ),
+                                        style: AppStyles.styleMedium16(context)
+                                            .copyWith(
+                                              color: isAppDarkMode()
+                                                  ? kDarkThirdColor
+                                                  : kLightThirdColor,
+                                            ),
                                       ),
                                       const SizedBox(height: 4),
                                       Row(
@@ -134,12 +141,13 @@ class MyCart extends StatelessWidget {
                                           Text(
                                             '\$ ${(item.price * item.numOfPieces).toStringAsFixed(2)}',
                                             style:
-                                                AppStyles.styleMedium16(context)
-                                                    .copyWith(
-                                              color: isAppDarkMode()
-                                                  ? kDarkPrimaryColor
-                                                  : kLightPrimaryColor,
-                                            ),
+                                                AppStyles.styleMedium16(
+                                                  context,
+                                                ).copyWith(
+                                                  color: isAppDarkMode()
+                                                      ? kDarkPrimaryColor
+                                                      : kLightPrimaryColor,
+                                                ),
                                           ),
                                           const Spacer(),
                                           _QuantityButton(
@@ -149,12 +157,13 @@ class MyCart extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
+                                              horizontal: 8.0,
+                                            ),
                                             child: Text(
                                               item.numOfPieces.toString(),
-                                              style:
-                                                  AppStyles.styleSemiBold14(
-                                                      context),
+                                              style: AppStyles.styleSemiBold14(
+                                                context,
+                                              ),
                                             ),
                                           ),
                                           _QuantityButton(
@@ -175,10 +184,7 @@ class MyCart extends StatelessWidget {
                     },
                   ),
                 const SizedBox(height: 16),
-                Padding(
-                  padding: 24.psh,
-                  child: const CheckoutDetails(),
-                ),
+                Padding(padding: 24.psh, child: const CheckoutDetails()),
               ],
             ),
           );

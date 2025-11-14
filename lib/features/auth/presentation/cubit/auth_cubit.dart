@@ -17,15 +17,15 @@ class AuthCubit extends Cubit<AuthState> {
   );
   static const List<UserProfile> _seedUsers = [
     UserProfile(
-      username: 'demo',
-      email: 'demo@gmail.com',
-      password: 'DemoPass123!',
+      username: 'user1',
+      email: 'user1@gmail.com',
+      password: 'User123!',
       address: 'Demo Street 01',
     ),
     UserProfile(
-      username: 'shopapay',
-      email: 'shopapay@gmail.com',
-      password: 'Shopapay#2025',
+      username: 'user2',
+      email: 'user2@gmail.com',
+      password: 'User123!',
       address: 'Setec University Campus',
     ),
   ];
@@ -169,7 +169,7 @@ class AuthCubit extends Cubit<AuthState> {
         state.copyWith(
           status: AuthStatus.error,
           message:
-              'Invalid credentials. Try demo@gmail.com / DemoPass123! or register a new account.',
+              'Invalid credentials. Try user1@gmail.com / User123! or register a new account.',
         ),
       );
     }

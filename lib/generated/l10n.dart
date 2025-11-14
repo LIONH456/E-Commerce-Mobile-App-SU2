@@ -2304,6 +2304,66 @@ class S {
     );
   }
 
+  /// `Order Summary`
+  String get orderSummary {
+    return Intl.message(
+      'Order Summary',
+      name: 'orderSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No items selected`
+  String get noItemsSelected {
+    return Intl.message(
+      'No items selected',
+      name: 'noItemsSelected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Successful!`
+  String get orderSuccess {
+    return Intl.message(
+      'Order Successful!',
+      name: 'orderSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you for your order`
+  String get thankyouForOrder {
+    return Intl.message(
+      'Thank you for your order',
+      name: 'thankyouForOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your order has been confirmed and will be shipped soon.`
+  String get orderConfirmation {
+    return Intl.message(
+      'Your order has been confirmed and will be shipped soon.',
+      name: 'orderConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Shopping`
+  String get continueShopping {
+    return Intl.message(
+      'Continue Shopping',
+      name: 'continueShopping',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Khmer`
   String get khmer {
     return Intl.message('Khmer', name: 'khmer', desc: '', args: []);

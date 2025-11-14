@@ -296,5 +296,11 @@
   "loginButton": "Login",
   "asteriskPlaceholder": "********",
   "languageChangeRestartMessage": "Language will be changed. The app will close to apply the changes.",
+  "orderSummary": "Order Summary",
+  "noItemsSelected": "No items selected",
+  "orderSuccess": "Order Successful!",
+  "thankyouForOrder": "Thank you for your order",
+  "orderConfirmation": "Your order has been confirmed and will be shipped soon.",
+  "continueShopping": "Continue Shopping",
   "khmer": "Khmer"
 }

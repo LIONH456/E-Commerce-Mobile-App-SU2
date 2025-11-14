@@ -7,3 +7,5 @@ class MinusNumberState extends ProductDetailsState {}
 class AddNumberState extends ProductDetailsState {}
 
 class AddFavState extends ProductDetailsState {}
+
+class RelatedProductsReady extends ProductDetailsState {}

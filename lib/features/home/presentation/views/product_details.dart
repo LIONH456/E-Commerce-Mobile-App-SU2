@@ -14,6 +14,7 @@ import '../../../../generated/l10n.dart';
 import '../../../shared/widgets/custom_product_item.dart';
 import '../../data/models/product_model.dart';
 import '../../../my_cart/presentation/cubit/my_card_cubit.dart';
+import '../../../my_cart/data/models/my_card_model.dart';
 import '../cubits/product_details_cubit/product_details_cubit.dart';
 import '../cubits/product_details_cubit/product_details_state.dart';
 import 'description_screen.dart';
@@ -27,7 +28,7 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = S.of(context);
     return BlocProvider(
-      create: (context) => ProductDetailsCubit(),
+      create: (context) => ProductDetailsCubit()..getRelatedProducts(item.id),
       child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
         builder: (BuildContext context, state) {
           var cubit = ProductDetailsCubit.get(context);
@@ -305,7 +306,7 @@ class ProductDetails extends StatelessWidget {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: cubit.relatedProduct.products.length,
+                    itemCount: cubit.filteredRelatedProduct.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: (context.screenWidth / 200).round(),
                       crossAxisSpacing: 20,
@@ -319,12 +320,14 @@ class ProductDetails extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProductDetails(item: item),
+                              builder: (context) => ProductDetails(
+                                item: cubit.filteredRelatedProduct[index],
+                              ),
                             ),
                           );
                         },
                         child: CustomProductItem(
-                          item: cubit.relatedProduct.products[index],
+                          item: cubit.filteredRelatedProduct[index],
                         ),
                       );
                     },
@@ -378,7 +381,106 @@ class ProductDetails extends StatelessWidget {
                             context,
                           ).copyWith(color: Colors.white),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          int qty = 1;
+                          await showModalBottomSheet<void>(
+                            context: context,
+                            builder: (ctx) {
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'Quantity',
+                                          style: AppStyles.styleSemiBold16(
+                                            context,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                if (qty > 1)
+                                                  setState(() => qty--);
+                                              },
+                                              icon: const Icon(Icons.remove),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 16.0,
+                                                  ),
+                                              child: Text(
+                                                qty.toString(),
+                                                style: AppStyles.styleMedium16(
+                                                  context,
+                                                ),
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () =>
+                                                  setState(() => qty++),
+                                              icon: const Icon(Icons.add),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CustomButton(
+                                                onPressed: () {
+                                                  Navigator.pop(ctx);
+                                                },
+                                                child: Center(
+                                                  child: Text(l.cancel),
+                                                ),
+                                                backColor: Colors.transparent,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 12),
+                                            Expanded(
+                                              child: CustomButton(
+                                                onPressed: () {
+                                                  final buyItem = MyCardModel(
+                                                    id: item.id.isNotEmpty
+                                                        ? item.id
+                                                        : item.name,
+                                                    name: item.name,
+                                                    image: item.image,
+                                                    price: item.price,
+                                                    numOfPieces: qty,
+                                                  );
+                                                  MyCartCubit.get(
+                                                    context,
+                                                  ).setBuyNow(buyItem);
+                                                  Navigator.pop(ctx);
+                                                  router.push(
+                                                    AppRoutes.checkout,
+                                                  );
+                                                },
+                                                child: Center(
+                                                  child: Text(l.continuee),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 12),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                   ],

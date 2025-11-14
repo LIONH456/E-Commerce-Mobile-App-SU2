@@ -12,6 +12,7 @@ import '../../features/home/presentation/views/product_details.dart';
 import '../../features/home/data/models/product_model.dart';
 import '../../features/home/presentation/views/write_review_screen.dart';
 import '../../features/my_cart/presentation/views/checkout_view.dart';
+import '../../features/my_cart/presentation/views/order_success_view.dart';
 import '../../features/notifications&messages/presentation/views/chat_view.dart';
 import '../../features/notifications&messages/presentation/views/notifications_layout.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
@@ -42,6 +43,7 @@ class AppRoutes {
   static const String allReview = '/allReview';
   static const String writeReview = '/writeReview';
   static const String checkout = '/checkout';
+  static const String orderSuccess = '/orderSuccess';
   static const String newFashion = '/newFashion';
   static const String editProfile = '/editProfile';
   static const String settings = '/settings';
@@ -160,6 +162,15 @@ final GoRouter router = GoRouter(
         return FadeThroughTransitionPageWrapper(
           transitionKey: state.pageKey,
           page: const CheckoutView(),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.orderSuccess,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return FadeThroughTransitionPageWrapper(
+          transitionKey: state.pageKey,
+          page: const OrderSuccessView(),
         );
       },
     ),
